@@ -1,0 +1,16 @@
+---
+- name: install ruby gems for root
+  gem:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ gem_install }}"
+  when: gem_install is defined and user is not defined
+- name: install ruby gems for "{{ user }}"
+  become: yes
+  become_user: "{{ user }}"
+  gem:
+    name: "{{ item }}"
+    state: latest
+    user_install: yes
+  with_items: "{{ gem_install }}"
+  when: gem_install is defined and user is defined
