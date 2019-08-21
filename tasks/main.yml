@@ -1,4 +1,7 @@
 ---
 # tasks file for ruby
+- import_tasks: brew-install.yml
+  when: ansible_distribution == 'MacOSX'
 - import_tasks: apt-install.yml
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 - import_tasks: gem-install.yml
