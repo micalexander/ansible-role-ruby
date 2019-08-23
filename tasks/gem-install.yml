@@ -8,6 +8,7 @@
 - name: install ruby gems for root
   become: yes
   become_user: root
+  become_method: su
   gem:
     name: "{{ item }}"
     state: latest
