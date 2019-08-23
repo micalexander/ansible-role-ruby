@@ -8,7 +8,10 @@
 - name: install ruby gems for {{ user }}
   become: true
   become_user: "{{ user }}"
-  raw: if ! gem list | grep your_gem_name; then sudo gem install {{ item }} ; fi;
+  # raw: if ! gem list | grep your_gem_name; then sudo gem install {{ item }} ; fi;
+  gem:
+    name: "{{ item }}"
+    state: latest
   with_items: "{{ gem_install }}"
   when: gem_install is defined and user == 'root'
 - name: install ruby gems for "{{ user }}"
